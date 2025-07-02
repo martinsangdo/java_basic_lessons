@@ -79,7 +79,7 @@ public class Question4 {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
             // Iterate over each row of data
             for (Employee row : dataToWrite) {
-                String line = row.convert2Line();
+                String line = row.convert2Line();   //1 employee info as a line
                 writer.write(line);
                 writer.newLine();
             }
