@@ -22,7 +22,7 @@ public class Question4 {
             System.out.println("The file has no data or cannot be read");
             return;
         }
-        System.out.println("Number of employees: " + employeeNum);
+        System.out.println("Total number of employees in the original file: " + employeeNum);
         //get a list of employees
         Set<Integer> uniqueNumbers = generateUniqueRandomNumbers(employeeNum, 1, 100);
         Iterator<Integer> iterator = uniqueNumbers.iterator();
@@ -83,7 +83,7 @@ public class Question4 {
                 writer.write(line);
                 writer.newLine();
             }
-            System.out.println("CSV file '" + filename + "' saved successfully!");
+            System.out.println("File '" + filename + "' is saved successfully!");
         } catch (IOException e) {
             e.printStackTrace();
             System.err.println("Error saving CSV file: " + e.getMessage());
