@@ -1,66 +1,25 @@
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Scanner;
-import java.util.Set;
 
 public class Question2 {
-    static Set<String> getSubStrings(String originalString, int subStringLen){
-        Set<String> subArrayList = new HashSet<>();
-        if (Objects.isNull(originalString)){
-            return subArrayList;
+    static int[] getTotal(int[][] matrix){
+        int colNum = matrix[0].length;
+        int[] results = new int[2];
+        results[0] = 0;
+        results[1] = 0;
+        //get total 1
+        for (int i=0; i<colNum; i++){
+            results[0] += matrix[i][i];
         }
-        int strLen = originalString.length();
-        
-        //calculate how many sub strings
-        int subStringsNum = (int)(strLen / subStringLen);
-        subStringsNum += (strLen % subStringLen == 0)?0:1;
-        
-        for (int i=0; i<subStringsNum; i++){
-            int endPosition = i*subStringLen + subStringLen;
-            if (endPosition >= strLen){
-                endPosition = strLen;
-            }
-            subArrayList.add(originalString.substring(i*subStringLen, endPosition));
+        //get total 2
+        for (int i=0; i<colNum; i++){
+            results[1] += matrix[colNum - i - 1][i];
         }
-        
-        return subArrayList;
+
+        return results;
     }
 
     public static void main(String[] args) throws Exception {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Input a string:");
-        String originalString = sc.nextLine();
-        if (originalString.length() == 0){
-            System.out.println("Please input a non-empty string.");
-            sc.close();
-            return;
-        }
-        System.out.println("Original string: " + originalString);
-
-        System.out.println("Input the length of subarray:");
-        try {
-            int subStringLen = sc.nextInt();
-            sc.nextLine();
-            if (subStringLen <= 0){
-                System.out.println("Please input an integer number");
-            } else {
-                Set<String> subStrings = getSubStrings(originalString, subStringLen);
-                if (subStrings.size() > 0){
-                    System.out.println("The result array is as below:");
-                    for (String subString : subStrings){
-                        System.out.println(subString);
-                    }
-                } else {
-                    System.out.println("There is no result");
-                }
-            }
-        } catch (Exception e){
-            e.printStackTrace();
-            //in case user inputs text instead of number
-            System.out.println("Exception: Please input an integer number");
-        }
-
-        sc.close();
+        int[][] matrix = { {1,4,6},{8,5,2},{1,9,9} };
+        int[] results = getTotal(matrix);
+        System.out.println("Results: [" + results[0] + "," + results[1] + "]");
     }
 }
